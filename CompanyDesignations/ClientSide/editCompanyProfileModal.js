@@ -49,12 +49,6 @@
         vm.designationsTotal = 0;
         vm.changeBadge = _changeBadge;
 
-        //vm.smallBusinessOwnedURL = "/Content/Theme/img/companyType/Small-Business-48-grey.png";
-        //vm.veteranOwnedURL = "/Content/Theme/img/companyType/Medal-48-grey.png";
-        //vm.minorityOwnedURL = "/Content/Theme/img/companyType/Racism-48-grey.png";
-        //vm.womenOwnedURL = "/Content/Theme/img/companyType/Female-48-grey.png";
-
-
         vm.smallBusinessOwnedURL = (vm.smallBusiness) ? "/Content/Theme/img/companyType/Small-Business-48.png" : "/Content/Theme/img/companyType/Small-Business-48-grey.png";
         vm.veteranOwnedURL = (vm.veteranOwned) ? "/Content/Theme/img/companyType/Medal-48.png" : "/Content/Theme/img/companyType/Medal-48-grey.png";
         vm.minorityOwnedURL = (vm.minorityOwned) ? "/Content/Theme/img/companyType/Racism-48.png" : "/Content/Theme/img/companyType/Racism-48-grey.png";

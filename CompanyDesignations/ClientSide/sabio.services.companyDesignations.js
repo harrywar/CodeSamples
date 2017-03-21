@@ -3,16 +3,16 @@
 sabio.services.companyDesignations.getURLS = function (companyDesignations) {
 
     var designationCodes = {
-        SmallBusiness: 1, // 00001
-        VeteranOwned: 2, // 00010
-        MinorityOwned: 4, // 00100
-        WomenOwned: 8 // 01000
+        SmallBusiness: 1,
+        VeteranOwned: 2, 
+        MinorityOwned: 4, 
+        WomenOwned: 8 
     }
 
     var designations = {};
     
 
-    15 // 01111
+    15
 
     designations.smallBusinessURL = "/Content/Theme/img/companyType/Small-Business-48-grey.png";
     designations.veteranOwnedURL = "/Content/Theme/img/companyType/Medal-48-grey.png";
