@@ -1,0 +1,27 @@
+﻿<!-- contacts modal -->
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="mcmc.cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <div class="panel-heading">
+        <h3 class="panel-title">Contacts</h3>
+    </div>
+</div>
+<div class="modal-body scroll" id="contacts_modal_body">
+    <div class="col-md-6 scroll" id="email_list">
+        <div ng-repeat="item in mcmc.items" class="list-group list-group-contacts">
+            <div class="list-group-item" id="user_template_height" data-receiverId="{{item.userId}}">
+                <img ng-if="!item.mediaUrl" ng-src="https://cdn1.iconfinder.com/data/icons/social-messaging-productivity-1/128/profile2-128.png" class="pull-left" id="user_image_url" alt="">
+                <img ng-if="item.mediaUrl" ng-src="{{item.mediaUrl}}" class="pull-left" id="user_image_url" alt="">
+                <a href="#" class="contacts-title" ng-click="mcmc.checkIfConversationExists(item)">{{item.firstName + ' ' + item.lastName}}</a>
+                <p class="user-company">{{item.companyName}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+
+    <div class="input-group">
+        <span class="input-group-btn">
+        </span>
+    </div>
+</div>

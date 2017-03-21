@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Messages";
+    Layout = "~/Views/Shared/_QuoteMuleAuthenticatedLayout.cshtml";
+}
+
+<!-- START CONTENT FRAME -->
+<div class="content-frame message-page" ng-cloak ng-controller="conversationController as cc" style="height:500px;">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-comments"></span> Messages</h2>
+            <div class="pull-right" >
+                <button class="btn btn-danger" style="margin-left:340px" id="contacts_button" ng-click="cc.openModal()"><span class="fa fa-book"></span> Contacts</button>
+            </div>
+        </div>
+
+        <!-- END CONTENT FRAME TOP -->
+        <!-- START CONTENT FRAME RIGHT -->
+        <div class="content-frame-right scroll" id="message_right_frame">
+
+            <!-- right frame user template -->
+            <!-- BOT CONVERSATION-->
+            <div class="list-group list-group-contacts">
+                <a ng-href="#/{{cc.botConversation.conversationId}}/{{cc.botConversation.botId}}" class="list-group-item" data-conversationId="{{ cc.botConversation.conversationId }}" id="user_template_height">
+                    <img ng-if="!cc.botConversation.botUrl" ng-src="https://cdn1.iconfinder.com/data/icons/social-messaging-productivity-1/128/profile2-128.png" class="pull-left" id="user_image_url" alt="">
+                    <img ng-if="cc.botConversation.botUrl" ng-src="{{cc.botConversation.botUrl}}" class="pull-left" id="user_image_url" alt="">
+                    <span class="contacts-title inline-block" data-messageReceiverId="{{cc.botConversation.botId}}">{{cc.botConversation.botFullName}}</span>
+
+                    <p class="company-name">{{cc.botConversation.botCompanyName }}</p>
+                </a>
+            </div>
+            <!-- END BOT CONVERSATION -->
+            <!-- CONTACT IS SENDER -->
+            <div class="list-group list-group-contacts">
+                <div ng-repeat="conversationItem in cc.conversationItems | orderBy: 'isRead'">
+                    <a ng-href="#/{{conversationItem.conversationId}}/{{conversationItem.receiverId}}" ng-if="cc.currentUserId == conversationItem.senderId" class="list-group-item signalr" data-conversationId="{{conversationItem.conversationId}}" id="user_template_height" @*ng-click="mhc.renderMessage(conversationItem.conversationId)"*@>
+                        <img ng-if="!conversationItem.receiverUrl" ng-src="https://cdn1.iconfinder.com/data/icons/social-messaging-productivity-1/128/profile2-128.png" class="pull-left" id="user_image_url" alt="">
+                        <img ng-if="conversationItem.receiverUrl" ng-src="{{conversationItem.receiverUrl}}" class="pull-left" id="user_image_url" alt="">
+                        <span class="contacts-title inline-block" data-messageReceiverId="{{conversationItem.receiverId}}">{{conversationItem.receiverFullName}}</span>
+                        <p ng-if="!conversationItem.isRead" class="inline-block">
+                            <span class="fa fa-circle text-danger"></span>
+                        </p>
+                        <p class="company-name">{{conversationItem.receiverCompanyName }}</p>
+                    </a>
+                    <!-- END CONTACT IS SENDER -->
+                    <!-- CONTACT IS NOT SENDER -->
+                    <a ng-href="#/{{conversationItem.conversationId}}/{{conversationItem.senderId}}" ng-if="cc.currentUserId !== conversationItem.senderId" class="list-group-item" data-conversationId="{{conversationItem.conversationId}}" id="user_template_height" @*ng-click="mhc.renderMessage(conversationItem.conversationId)"*@>
+                        <img ng-if="!conversationItem.receiverUrl" ng-src="https://cdn1.iconfinder.com/data/icons/social-messaging-productivity-1/128/profile2-128.png" class="pull-left" id="user_image_url" alt="">
+                        <img ng-if="conversationItem.receiverUrl" ng-src="{{conversationItem.senderUrl}}" class="pull-left" id="user_image_url" alt="">
+                        <span class="contacts-title" data-messageReceiverId="{{conversationItem.senderId}}">{{conversationItem.senderFullName}}</span>
+                        <p ng-if="!conversationItem.isRead" class="inline-block">
+                            <span class="fa fa-circle text-danger"></span>
+                        </p>
+                        <p class="company-name">{{conversationItem.senderCompanyName }}</p>
+
+                    </a>
+                    <!-- END CONTACT IS NOT SENDER -->
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT FRAME RIGHT -->
+        <!-- START CONTENT FRAME BODY -->
+        <div class="content-frame-body content-frame-body-left" ng-controller="messageController as mc">
+            <div ng-view></div>
+        </div>
+        <!---->
+        @*
+            <div class="content-frame-body content-frame-body-left" ng-controller="messageController as mc">
+
+                <div class="messages messages-img scroll" id="list_of_messages">
+
+                    <div ng-view></div>
+
+
+                </div>
+
+                <div class="panel panel-default push-up-10">
+                    <div class="panel-body panel-body-search">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                            </div>
+                            <form ng-submit="mc.submit()">
+                                <input type="text" class="form-control" id="input_message_form" ng-model="mc.messageContent" name="text" placeholder="Your message..." />
+                            </form>
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" id="send_message_button" ng-click="mc.sendMessage()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        *@
+        <!-- END CONTENT FRAME BODY -->
+        @*</div>*@
+    </div>
+</div>
+<!-- END PAGE CONTENT FRAME -->
+
+<link href="~/Content/Theme/custom.css" rel="stylesheet" />
+<link href="~/Content/Theme/CSS/summernote.css" rel="stylesheet" />
+
+@section Scripts {
+
+    @*<script src="~/Scripts/bower_components/signalr/jquery.signalR.js"></script>*@
+    @*<script src="~/Scripts/jquery.signalR-2.1.2.js"></script>*@
+    <script src="~/signalr/hubs"></script>
+    @*<script src="~/Scripts/bower_components/angular-signalr-hub/signalr-hub.js"></script>*@
+
+
+    <script src="~/Scripts/sabio.services.conversations.js"></script>
+    <script src="~/Scripts/sabio.services.messages.js"></script>
+
+    <script src="~/Scripts/sabio.services.botConversation.js"></script>
+    <script src="~/Scripts/app/Messages/Services/botConversationService.js"></script>
+
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/Theme/bootstrap-select.js"></script>
+
+    @* ANGULAR SCRIPTS *@
+    <script src="~/Scripts/app/Messages/Config/messageRouteConfig.js"></script>
+    <script src="~/Scripts/app/Messages/Services/messagingService.js"></script>
+    <script src="~/Scripts/app/SignalRService/SignalRService.js"></script>
+    <script src="~/Scripts/app/Messages/Controllers/messageController.js"></script>
+    <script src="~/Scripts/app/Messages/Controllers/conversationController.js"></script>
+    <script src="~/Scripts/app/Messages/Controllers/contactsModalController.js"></script>
+    @*<script src="~/Scripts/app/Messages/Controllers/messageHubController.js"></script>*@
+
+}

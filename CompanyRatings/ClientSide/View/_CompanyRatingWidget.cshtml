@@ -1,0 +1,54 @@
+﻿
+<!-- _CompanyRatingWidget -->
+<div ng-controller="companyRatingController as crc" ng-cloak>
+
+    <!-- Company Rating Panel -->
+    <div class="col-md-3">
+        <div class="panel panel-default" id="company_logo_panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{crc.buyerInfo.name}}</h3>
+            </div>
+            <div class="panel-body" id="logo_center">
+                <img class="company-image" ng-if="crc.buyerInfo.mediaUrl" ng-src="{{crc.buyerInfo.mediaUrl}}" />
+                <img class="company-image" ng-if="!crc.buyerInfo.mediaUrl" ng-src="https://static.licdn.com/sc/p/com.linkedin.company-frontend%3Acompany-frontend-static-content%2B0.1.1/f/%2Fcompany-frontend%2Fscmp%2Fimages%2Fthemes%2Fkaty%2Fghosts%2Fcompany%2Fghost_company_200x200_v1.png" />
+                <select id="company_rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <div ng-if="crc.numberOfReviews">{{crc.numberOfReviews}} customer reviews</div>
+                <div ng-if="!crc.numberOfReviews">0 customer reviews</div>
+                <div>{{crc.companyAvgRating | number : 2}} out of 5 stars</div>
+                <br />
+                <button type="button" class="btn btn-default review-button" ng-click="crc.openModal()">Write a Company Review</button>
+                <br />
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Most Recent Customer Reviews List -->
+    <div class="col-md-5">
+        <div class="panel panel-default" id="company_rating_widget">
+            <div class="panel-heading">
+                <h3 class="panel-title">Most Recent Customer Reviews</h3>
+            </div>
+            <div class="panel-body scroll" id="company_rating_list">
+
+                <div ng-repeat="item in crc.items">
+                    <div class="form-group" ng-if="crc.items">
+                        <div ng-model="item.rating" bar-rating-options="crc.ratingOptionsNumbers" bar-rating-settings="crc.ratingSettings9" data-ng-bar-rating></div>
+                        <div class="rater-id">By <a href="">{{item.reviewerFullName}}</a> on <time class="rating-time">{{item.createdDate | date : mediumDate}}</time> </div>
+                        <div id="formal_rating_comment">{{item.ratingComment}}</div>
+                    </div>
+
+                    <br />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

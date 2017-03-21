@@ -1,0 +1,17 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="pcmc.cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="largeModalHead">Send Contract to Supplier</h4>
+    </div>
+    <div class="modal-body" style="text-align:center">
+        <a href="{{pcmc.publishedContractURL}}" target="_blank">
+            <img ng-src="https://cdn.worldvectorlogo.com/logos/adobe-pdf-icon.svg" style="width:50px;" />
+            <p>Contract</p>
+        </a>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="pcmc.cancel()">Close</button>
+        <button type="button" class="btn btn-success" ng-click="pcmc.sendContractToSupplier(5)">Send Contract to Supplier</button>
+    </div>
+</div>

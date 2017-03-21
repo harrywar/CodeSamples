@@ -1,0 +1,56 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="cemc.cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="largeModalHead">Contract</h4>
+    </div>
+    <div class="modal-body">
+
+        <textarea readonly class="col-md-12 col-sm-12 col-xs-12 contract-text" style="height:500px;">General Contract&#10;&#10;I propose, as general contractor, to furnish all materials required for the above Project and to construct the Project in strict conformity with all plans, Invitation to Bid, other specification and drawings provided by the Project Owner and any laws, statues, ordinances, rules, or regulations of any governmental agencies or public authorities relating to the Project for the sum of $__{{cemc.currentQuoteInfo.bidAmount | number}}__.
+            &#10;I agree to execute a Contract for the Project, deliver the bonds required by that Contract, commence actual work on the Project within the times specified in the contract documents issued in connection with the Project, and to complete the Project by __{{cemc.currentQuoteInfo.quoteRequestDueDate | date: 'medium'}}__ , excluding Saturdays, Sundays, and legal holidays, after commencement of actual work on the Project unless delayed by any of the causes mentioned in the form of Contract issued in connection with the Project.
+            &#10;I acknowledge that I have performed the following:&#10;&#10;A. Carefully examined the drawings and specifications for the Project as provided by the Project Owner.
+            &#10;B. Carefully examined all documents issued in connection with the Project, including:
+            &#10;C. Examined the job site on which the Project is to be constructed, including all soil boring, and have made other tests concerning subsoil conditions, and have
+            &#10;D. Determined to my own satisfaction all conditions or limitation that exist or that may arise affecting the Project and all difficulties that may be encountered in the construction of the Project.
+            &#10;E. Made this bid on the bases of the above examinations, inspections and determinations, and not on the basis of any representations or promises made to me.
+            &#10;Quote Request ID: {{cemc.currentQuoteInfo.quoteRequestId}}
+            &#10;Quote ID: {{cemc.currentQuoteInfo.quoteId}}
+            &#10;Category: {{cemc.currentQuoteInfo.quoteRequestItemName}}
+            &#10;Bid Amount: ${{cemc.currentQuoteInfo.bidAmount | number}}
+            &#10;Due Date: {{cemc.currentQuoteInfo.quoteRequestDueDate | date: 'medium'}}
+            &#10;Quote Item Name: {{cemc.currentQuoteInfo.quoteItemList[0].name}}
+            &#10;Quote Item Quantity: {{cemc.currentQuoteInfo.quoteItemList[0].quantity | number}} {{cemc.currentQuoteInfo.quoteItemList[0].unit}}
+            &#10;Quote Item Volume: {{cemc.currentQuoteInfo.quoteItemList[0].volume | number}} {{cemc.currentQuoteInfo.quoteItemList[0].unit}}
+            &#10;Seller: {{cemc.currentQuoteInfo.sellerCompanyName}} 
+            &#10;Seller Address: {{cemc.currentQuoteInfo.sellerCompanyAddress1}} {{cemc.currentQuoteInfo.sellerCompanyCity}}, {{cemc.currentQuoteInfo.sellerCompanyState}} {{cemc.currentQuoteInfo.sellerCompanyZipCode}}
+            &#10;Buyer: {{cemc.currentQuoteInfo.buyerCompanyName}}
+            &#10;Buyer Address: {{cemc.currentQuoteInfo.sellerCompanyAddress1}} {{cemc.currentQuoteInfo.buyerCompanyCity}}, {{cemc.currentQuoteInfo.buyerCompanyState}} {{cemc.currentQuoteInfo.buyerCompanyZipCode}}
+        </textarea>
+
+        <!--<summernote config="cemc.options">
+
+            <h4>Also subhearder available too</h4>
+            <p><span style="font-wei
+            ght: bold;">Lorem ipsum dolor sit amet</span>, consectetur adipiscing elit. Ut vel consequat massa. <span style="color: rgb(99, 0, 0); font-weight: bold;">Aliquam augue odio, vulputate non tempus et, sollicitudin in magna</span>. Sed dignissim, tellus sagittis varius vestibulum, erat sapien varius dolor, non elementum sem velit ut nunc. Sed gravida vehicula ipsum, sit amet auctor nunc ultricies et. <a href="http://#">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</a> <span style="font-style: italic;">Morbi dapibus massa faucibus</span>, euismod augue non, facilisis odio. In blandit consectetur nibh, eu venenatis ligula condimentum sed. Nullam magna velit, eleifend ut tincidunt sit amet, sagittis id ligula. Aenean eget metus auctor, fringilla nunc in, lacinia nisi. Suspendisse potenti. Suspendisse vel vulputate lectus.</p>
+            <blockquote>
+                <span style="text-decoration: underline;">
+                    Cras posuere scelerisque faucibus
+                </span>. Fusce consectetur elit at nisi accumsan rutrum. Sed quis risus vel purus hendrerit mattis. In hac habitasse platea dictumst. Morbi volutpat justo in nunc tincidunt, sed auctor dui ullamcorper. <span style="color: rgb(41, 82, 24);">Praesent eleifend adipiscing nisi</span>. <a href="http://#">Aliquam mi elit, cursus nec posuere vel, varius in tortor</a>. Nullam fermentum nunc felis, sed varius ante auctor et.
+            </blockquote>
+            <p>Curabitur urna neque, pharetra vel felis commodo, dictum bibendum odio.<a href="http://#"> Suspendisse mauris augue</a>, volutpat vel augue in, pellentesque semper turpis. Donec congue, magna quis condimentum facilisis, dolor mauris suscipit enim, eu aliquam risus elit vel diam.</p>
+
+        </summernote>-->
+
+
+        <!--<div class="row">
+            <br />
+            <h5>pdf test</h5>
+            <embed src="https://s3-us-west-2.amazonaws.com/sabio-training/C27/5cbaad08-65a6-4767-aaea-230ef52c5983.pdf" width="200px" height="400px" />
+        </div>-->
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cemc.cancel()">Close</button>
+        <button type="button" class="btn btn-success" ng-click="cemc.insertCurrentQuoteInfo()">Insert Current Quote Information</button>
+        <button type="button" class="btn btn-primary contract-button" ng-click="cemc.publishContract()">Publish as PDF</button>
+    </div>
+</div>

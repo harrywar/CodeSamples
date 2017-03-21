@@ -1,0 +1,72 @@
+﻿<!-- MESSAGE TEMPLATE -->
+<div class="messages messages-img" id="list_of_messages_profile_page">
+    <!-- IF NO MESSAGES -->
+    <div ng-if="!mc.messageItems">
+        <div class="item in">
+            <div class="image">
+                <img src="" alt="" id="message_template_user_image" class="user-image">
+            </div>
+            <div class="text">
+                <div class="heading">
+                    <a class="sender-id" href="#"></a>
+                    <span class="date"></span>
+                </div>
+                <span class="actual-content">No messages</span>
+            </div>
+        </div>
+    </div>
+    <!-- END IF NO MESSAGES -->
+
+    <div class="message-item-wrapper" ng-repeat="messageItem in mc.messageItems">
+        <!-- IF USER'S MESSAGES -->
+        <div class="item" ng-if="mc.currentUserId == messageItem.senderId">
+            <div class="image">
+                <img ng-if="!messageItem.senderUrl" ng-src="https://cdn1.iconfinder.com/data/icons/social-messaging-productivity-1/128/profile2-128.png" alt="" id="message_template_user_image" class="user-image">
+                <img ng-if="messageItem.senderUrl" ng-src="{{messageItem.senderUrl}}" alt="" id="message_template_user_image" class="user-image">
+            </div>
+            <div class="text" ng-class="messageItem.isRead? '': 'unread'">
+                <div class="heading">
+                    <div id="signalr" style="display:none"  data-currentConversationId="{{ messageItem.conversationId }}"></div>
+                    <a class="sender-id inline-block">{{messageItem.senderFullName}}</a>
+                    <p ng-if="!messageItem.isRead" class="inline-block">
+                        <span class="fa fa-eye-slash"></span>
+                    </p>
+                    <span class="date">{{messageItem.createDate | date : 'short'}}</span>
+                </div>
+                <span class="actual-content" ng-model="mc.messageContent">{{messageItem.content}}</span>
+            </div>
+        </div>
+        <!-- END IF USER'S MESSAGES -->
+        <!-- IF OTHER GUY'S MESSAGES -->
+        <div class="item in" ng-if="mc.currentUserId !== messageItem.senderId">
+            <div class="image">
+                <img ng-if="!messageItem.senderUrl" ng-src="https://cdn1.iconfinder.com/data/icons/social-messaging-productivity-1/128/profile2-128.png" alt="" id="message_template_user_image" class="user-image">
+                <img ng-if="messageItem.senderUrl" ng-src="{{messageItem.senderUrl}}" alt="" id="message_template_user_image" class="user-image">
+            </div>
+            <div class="text">
+                <div class="heading">
+                    <a class="sender-id inline-block">{{messageItem.senderFullName}}</a>
+                    <span class="date">{{messageItem.createDate | date : 'short'}}</span>
+                </div>
+                <span class="actual-content">{{messageItem.content}}</span>
+            </div>
+        </div>
+        <!-- END IF OTHER GUY'S MESSAGES -->
+    </div>
+</div>
+<!-- MESSAGE INPUT -->
+<div class="panel panel-default push-up-10">
+    <div class="panel-body panel-body-search">
+        <div class="input-group">
+            <div class="input-group-btn">
+            </div>
+            <form ng-submit="mc.submit()">
+                <input type="text" class="form-control" id="input_message_form" ng-model="mc.messageContent" name="text" placeholder="Your message..." />
+            </form>
+            <div class="input-group-btn">
+                <button class="btn btn-default" id="send_message_button" ng-click="mc.sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MESSAGE INPUT -->

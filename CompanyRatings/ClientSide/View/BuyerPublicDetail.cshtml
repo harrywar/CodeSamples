@@ -1,0 +1,208 @@
+﻿@model Sabio.Web.Models.ViewModels.ItemViewModel<int>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<input type="hidden" id="BUYERID" value="@Model.Item" />
+
+<div class="row">
+    <br />
+    <br />
+    <a href="/../Public/BuyerProfiles">Back to Buyer Public Profiles</a>
+    <br />
+    <br />
+</div>
+
+<!-- Dashboard/Index -->
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMPANY RATINGS & EMPLOYEES ROW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<div class="row">
+
+    <!-- Rating Block -->
+
+    @Html.Partial("_CompanyRatingWidget")
+
+    <!-- END Rating Block -->
+
+
+
+
+    <!--  Employees Block -->
+
+    @Html.Partial("_CompanyEmployeesWidget")
+
+    <!-- End Employees Block -->
+
+</div>
+
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LOCATIONS & MAPS ROW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+<div class="row">
+
+    <!-- Address Block -->
+    <div class="col-md-6">
+
+        @Html.Partial("_PublicBuyerPageAddressBookWidget")
+
+    </div>
+
+    <!-- END Address Block -->
+    <!--  Map Block -->
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body panel-body-map">
+                <div id="map_display" style="width: 100%; height: 30em;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Map Block -->
+
+</div>
+
+
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   QUOTE REQUESTS ROW   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<!-- Quote Requests Block -->
+<div class="col-md-12">
+    <div class="panel panel-default panel-scroll">
+        <div class="panel-heading">
+
+            <h3 class="panel-title">Quote Requests</h3>
+
+            <ul class="panel-controls" style="margin-top: 2px;"></ul>
+        </div>
+
+        <div class="panel-body panel-body">
+            
+            @Html.Partial("_PublicBuyerPageActiveQuoteRequestsWidget")
+
+        </div>
+    </div>
+</div>
+<!-- END Quote Requests Block -->
+
+
+<link href="~/Content/Theme/CSS/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/fontawesome-stars.css" rel="stylesheet" />
+<link href="~/Content/fontawesome-stars-o.css" rel="stylesheet" />
+
+@section pageInitScripts {
+    <script src="~/Scripts/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+    <script src="~/Scripts/bower_components/angular-bar-rating/dist/angular-bar-rating.js"></script>
+    <script src="~/Scripts/app/Modules/sabio.module.ngBarRating.js"></script>
+
+}
+
+@section Scripts{
+
+    @* JQUERY *@
+
+    <script type="text/javascript">
+        (function () {
+            if (sabio) {
+                sabio.p = {
+                    companyId: $("#PAGECOMPANY").val()
+                };
+
+            } else {
+                console.log("sabio doesn't exist...");
+            }
+        })();
+
+        currentBuyerId = $('#BUYERID').val();
+
+        console.log('currentBuyerId:', currentBuyerId);
+
+    </script>
+
+    @* END JQUERY *@
+
+    @* ANGULAR *@
+    @*<script src="~/Scripts/ng/angular-route.min.js"></script>*@
+
+    @* ADDRESS SERVICE *@
+    <script src="~/Scripts/sabio.services.addresses.js"></script>
+
+    @* MAPS  *@
+
+    <script src="~/Scripts/sabio.googleMaps.js"></script>
+    @*<script src="~/Scripts/sabio.services.googlemaps.js"></script>*@
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzti6Y2roH_pn68PaXEhG4bkl4BZK15cw&callback=sabio.map.init">
+    </script>
+
+    @* Theme *@
+    <script src="~/Scripts/Theme/jquery.blueimp-gallery.min.js"></script>
+
+    @* Address Service*@
+    <script src="~/Scripts/app/Addresses/Services/googleMapService.js"></script>
+    <script src="~/Scripts/app/Addresses/Services/addressApiService.js"></script>
+
+    @* Media Service *@
+    <script src="~/Scripts/sabio.services.media.js"></script>
+    <script src="~/Scripts/app/Media/Services/mediaApiService.js"></script>
+
+    @* Company Profile Services *@
+    <script src="~/Scripts/sabio.services.companyProfile.js"></script>
+    <script src="~/Scripts/app/Company/Services/companyProfileApiService.js"></script>
+
+
+    @* Company Rating Service *@
+    <script src="~/Scripts/sabio.services.companyratings.js"></script>
+    <script src="~/Scripts/app/CompanyRatings/Services/companyRatingService.js"></script>
+
+    @* --- ANGULAR CONTROLLERS --- *@
+
+    @* Company Rating Controllers *@
+    <script src="~/Scripts/app/CompanyRatings/Controllers/companyRatingsController.js"></script>
+    <script src="~/Scripts/app/CompanyRatings/Controllers/companyRatingModalController.js"></script>
+
+    @* Media Controllers *@
+    <script src="~/Scripts/app/Media/Controlers/confirmMediaDeleteModalController.js"></script>
+    <script src="~/Scripts/app/Media/Controlers/editCompanyMediaModalController.js"></script>
+
+    @* Addressbook Controllers *@
+    <script src="~/Scripts/app/Addresses/Config/addressbookRouteConfig.js"></script>
+    <script src="~/Scripts/app/Addresses/Controllers/publicAddressBook.js"></script>
+    <script src="~/Scripts/app/Addresses/Controllers/addressBook.js"></script>
+
+    @* Resource Controllers *@
+    <script src="~/Scripts/app/Resources/Controllers/ResourceSubmitModalController.js"></script>
+
+
+    @* Company Media Gallery Controllers *@
+    <script src="~/Scripts/app/Company/Controllers/companyGalleryController.js"></script>
+
+    @* Company Employees *@
+    <script src="~/Scripts/sabio.services.addressBook.js"></script>
+    <script src="~/Scripts/app/CompanyEmployees/Services/companyEmployeeService.js"></script>
+    <script src="~/Scripts/app/CompanyEmployees/Controllers/companyEmployeeController.js"></script>
+
+@* Active Quote Requests *@
+<script src="~/Scripts/app/QuoteRequestTable/Services/QRServiceFactory.js"></script>
+<script src="~/Scripts/app/QuoteRequestTable/Controllers/QuoteRequestTableController.js"></script>
+
+
+    @* --- END ANGULAR CONTROLLERS --- *@
+
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  BOOKMARK EXTENSIONS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+    <script src="~/Scripts/app/Resources/Controllers/ResourceController.js"></script>
+    <script src="~/Scripts/app/Resources/Services/ServiceFactory.js"></script>
+    <script src="~/Scripts/app/Resources/Controllers/ResourceDeleteModalController.js"></script>
+    <script src="~/Scripts/app/Resources/Controllers/ResourceEditModalController.js"></script>
+    <script src="~/Scripts/app/Company/Controllers/companyProfile.js"></script>
+    <script src="~/Scripts/app/Company/Controllers/listOfBuyersController.js"></script>
+
+
+    <script src="~/Scripts/sabio.services.resources.js"></script>
+    <script src="~/Scripts/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+    <script src="~/Scripts/bower_components/angular-bar-rating/dist/angular-bar-rating.js"></script>
+    <script src="~/Scripts/app/Modules/sabio.module.ngBarRating.js"></script>
+
+
+}
+
